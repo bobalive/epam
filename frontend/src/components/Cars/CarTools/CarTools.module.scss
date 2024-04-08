@@ -1,0 +1,27 @@
+.toolContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  & div {
+    display: flex;
+    gap: 10px;
+  }
+}
+
+.tool {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid white;
+  padding: 5px;
+  transition: 0.2s;
+  cursor: pointer;
+
+  &:hover , &.active{
+    color: #1a1a1a;
+    background: white;
+  }
+}

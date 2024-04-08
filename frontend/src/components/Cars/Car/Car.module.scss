@@ -1,0 +1,50 @@
+.carContainer{
+  justify-content: center;
+  &.active{
+    background: linear-gradient(0deg, rgba(255, 165, 0, 0) 0%, rgb(255, 165, 0) 23%, rgb(255, 165, 0) 34%, rgba(255, 165, 0, 0) 100%);
+
+  }
+}
+
+.roadTools{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  margin-right: 10px;
+}
+.roadTool{
+  width: 40px;
+  height: 40px;
+  padding: 3px;
+  border-radius: 10px;
+  background: gray;
+  border: 3px transparent solid;
+  color: white;
+
+  &.active{
+    color: white;
+    border: 3px orange solid;
+
+  }
+}
+.roadContainer{
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: darkgray;
+}
+.road{
+  display: flex;
+  width: 100%;
+  justify-content: end;
+  align-items: center;
+  position: relative;
+  border-bottom: .2rem dashed white;
+  border-top: .2rem dashed white;
+
+}
+.car{
+  position: absolute;
+  left: 0;
+}

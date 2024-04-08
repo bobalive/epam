@@ -1,0 +1,26 @@
+.header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.navBox{
+  display: flex;
+  align-items:center ;
+  justify-content: center;
+  gap: 10px;
+}
+
+.navlink{
+  padding: 15px;
+  color: white;
+  border: 2px #1a1a1a solid;
+  transition: 0.2s;
+  &.active{
+    background: white;
+    color: black;
+  }
+}
+.navlink:hover{
+  background: white;
+  color: black;
+}

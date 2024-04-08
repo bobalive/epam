@@ -1,0 +1,12 @@
+.input{
+  height: 3.5em;
+  outline: none;
+  border: none;
+
+  &.disabled{
+    color: gray;
+    background: #525252;
+    cursor: default;
+  }
+
+}

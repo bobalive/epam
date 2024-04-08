@@ -1,0 +1,31 @@
+.btn{
+  display: block;
+  width: 150px;
+  &.active{
+    color: green;
+    background: none;
+    border: 1px solid green;
+    transition: 0.2s;
+    &:hover{
+      background: green;
+      color: white;
+    }
+  }
+
+  &.disabled{
+    background: gray;
+    color: #525252;
+    cursor: default;
+  }
+
+  &.default{
+    color: orange;
+    border: orange 1px solid ;
+    transition: 0.2s;
+    &:hover{
+      color: white;
+      background: orange;
+    }
+  }
+
+}
