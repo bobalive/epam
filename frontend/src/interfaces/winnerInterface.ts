@@ -9,9 +9,12 @@ export enum Order{
     desc="DESC"
 
 }
-export interface WinnerQueryInterface{
+export interface WinnerQueryInterface extends SortInterface{
     _page:number,
     _limit:number,
+
+}
+export interface SortInterface{
     _sort:Sort,
     _order:Order,
 }

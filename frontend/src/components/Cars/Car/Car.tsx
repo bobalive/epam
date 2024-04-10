@@ -57,7 +57,7 @@ export const Car = ({id,color,name,isSelected,position }:CarPropsInterface) => {
     }
   return(
       <div className={`${s.carContainer} ${isSelected&&s.active}`} key={id}>
-              <CarTools name={name} id={id} color={color} isSelected={isSelected} />
+              <CarTools name={name} id={id} color={color} isSelected={isSelected} isRace={isRace} isStarted= {isStarted}/>
           <div className={s.roadContainer}>
             <div className={s.roadTools}>
                 <Pause className={cn({[s.active]:!isStarted},[s.roadTool])}

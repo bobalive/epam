@@ -25,7 +25,7 @@ export const Tools = ()=>{
         for(let i= 0 ; i<100; i++){
             dispatch(createNewCar({name:getRandomCar() ,color:getRandomColor()}))
         }
-        dispatch(getNewCars)
+        dispatch(getNewCars())
     }
     const handleReset = ()=>{
         dispatch(setIsRace(false))

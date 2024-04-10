@@ -1,7 +1,7 @@
 import {
     CurrentWinnerInterface,
     Order,
-    Sort,
+    Sort, SortInterface,
     WinnerInterface,
     WinnersInterface
 } from "../../interfaces/winnerInterface.ts";
@@ -64,6 +64,10 @@ export const deleteWinnerCar  = createAsyncThunk(
                 time:-1,
             }
         },
+        sortTable(state , action:PayloadAction<SortInterface>){
+            state.sort = action.payload._sort
+            state.order = action.payload._order
+        },
         setWinners(state, action:PayloadAction<WinnerInterface[]>){
             state.winners = action.payload
         },
@@ -81,6 +85,6 @@ export const deleteWinnerCar  = createAsyncThunk(
      }
 })
 
-export const {setCurrnetWinner, setWinners,resetCurrentWinner,setWinnerPage} = winnerSlice.actions
+export const {setCurrnetWinner, setWinners,resetCurrentWinner,setWinnerPage,sortTable} = winnerSlice.actions
 export default winnerSlice.reducer
 
