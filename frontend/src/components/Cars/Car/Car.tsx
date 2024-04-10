@@ -46,8 +46,9 @@ export const Car = ({id,color,name,isSelected,position }:CarPropsInterface) => {
          await useAnimation({carRef,id,interval ,setWinner ,setNewPostion})
         setIsstarted(true)
     }
-    const handleStop = ()=>{
+    const handleStop = async ()=>{
         if(carRef.current){
+            await toggleEngine({id,status:'stopped'})
             setIsstarted(false)
             clearInterval(interval.current)
             carRef.current.style.transform = `translateX(${0}px)`
@@ -60,18 +61,17 @@ export const Car = ({id,color,name,isSelected,position }:CarPropsInterface) => {
           <div className={s.roadContainer}>
             <div className={s.roadTools}>
                 <Pause className={cn({[s.active]:!isStarted},[s.roadTool])}
-                onClick={()=> {
+                onClick={async ()=> {
                     if(isStarted){
-                    setCarState('stop')
-                    handleStop()
-                    toggleEngine({id,status:'stopped'})
+                        setCarState('stop')
+                        await handleStop()
                     }
                 }}/>
                 <Play className={cn({[s.active]: isStarted}, [s.roadTool])}
-                onClick={()=> {
+                onClick={async ()=> {
                    setCarState('drive')
                     if(carState === 'stop'){
-                        handleAnimation()
+                        await handleAnimation()
                     }
                 }}/>
             </div>
