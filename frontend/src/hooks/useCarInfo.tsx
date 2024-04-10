@@ -13,6 +13,6 @@ export const useCarInfo = (id:number):carInfoInterface=>{
                 setcarInfo({color:res.color ,name:res.name})
             }
         })
-    }, []);
+    }, [id]);
     return carInfo
 }
