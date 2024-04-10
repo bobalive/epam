@@ -70,18 +70,24 @@ const carsSlice = createSlice({
                 if(item.id === action.payload.id){
                     return {
                         ...item,
-                        postion:action.payload.position
+                        position:action.payload.position
                     }
                 }
                 return item
             })
+        },
+        resetPositions(state , _action){
+            state.cars = state.cars?.map(car =>({
+                ...car,
+                position:0
+            }))
         }
     },
     extraReducers: (builder) => {
         builder.addCase(getNewCars.fulfilled, (state, action) => {
             state.cars =  action.payload?.map(item=>({
                 ...item,
-                postion:0
+                position:0
             }));
         });
         builder.addCase(createNewCar.fulfilled , (state, _action)=>{
@@ -109,5 +115,5 @@ const carsSlice = createSlice({
 
     },
 });
-export const { setCars,setPage,setSelectedCar,setPosition } = carsSlice.actions;
+export const { setCars,setPage,setSelectedCar,setPosition,resetPositions } = carsSlice.actions;
 export default carsSlice.reducer;

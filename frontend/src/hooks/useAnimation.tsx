@@ -5,15 +5,16 @@ export interface useAnimationInterface {
     id:number
     interval: MutableRefObject<number|undefined>;
     carRef: RefObject<SVGSVGElement>;
-    setWinner?:(time:number)=>void
+    setWinner?:(time:number)=>void,
+    setNewPostion:(pos:number)=>void
 }
-export const useAnimation = async ({ interval, id, carRef,setWinner }: useAnimationInterface) => {
+export const useAnimation = async ({ interval, id, carRef,setWinner,setNewPostion }: useAnimationInterface) => {
     const speed = await toggleEngine({id,status:"started"})
     let pos = 0;
-
     driveCar({id}).then((res) => {
         if(!res) {
             clearInterval(interval.current)
+            setNewPostion(pos)
         }
     })
     const roadWidth = useRoadWidth()
@@ -26,6 +27,7 @@ export const useAnimation = async ({ interval, id, carRef,setWinner }: useAnimat
                 if(setWinner){
                     setWinner(+(500/speed).toFixed(2))
                 }
+                setNewPostion(pos)
                 clearInterval(interval.current);
             }
         }, 500/speed );

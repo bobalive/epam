@@ -11,8 +11,9 @@ import {toggleEngine} from "../../../api/cars.api.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreInterface} from "../../../interfaces/storeInterface.ts";
 import {setCurrnetWinner} from "../../../store/slices/winnersSlice.ts";
+import {setPosition} from "../../../store/slices/carSlise.ts";
 
-export const Car = ({id,color,name,isSelected }:CarPropsInterface) => {
+export const Car = ({id,color,name,isSelected,position }:CarPropsInterface) => {
     const [isStarted , setIsstarted]= useState(false)
     const [carState , setCatState]= useState<'stop'|'drive'>('stop')
 
@@ -21,23 +22,32 @@ export const Car = ({id,color,name,isSelected }:CarPropsInterface) => {
 
     const carRef=useRef<SVGSVGElement>(null)
     let interval = useRef<number>();
+
+    const setNewPostion= (position:number)=>{
+        dispatch(setPosition({id,position}))
+    }
     const setWinner = (time:number)=>{
         dispatch(setCurrnetWinner({time,name,color,id}))
     }
     useEffect(() => {
         handleStop()
-        if(isRace){
+        if(isRace && position == 0){
             setIsstarted(true)
             handleAnimation(setWinner)
         }
     }, [isRace]);
+    useEffect(() => {
+        if(carRef.current){
+            carRef.current.style.transform = `translateX(${position}px)`
+        }
+    }, [position , carRef.current]);
+
     const handleAnimation =  async (setWinner?:(time:number)=>void)=>{
-         await useAnimation({carRef,id,interval ,setWinner})
+         await useAnimation({carRef,id,interval ,setWinner ,setNewPostion})
         setIsstarted(true)
     }
     const handleStop = ()=>{
-        if(carRef.current){
-            carRef.current.style.transform = `translateX(${0}px)`;
+        if(carRef.current ){
             setIsstarted(false)
             clearInterval(interval.current)
         }

@@ -14,7 +14,6 @@ export const Pagination = ({page,type}:PaginationInterface) => {
         if(type == PaginationType.garage){
             dispatch(getTotalCount())
         }
-
     }, []);
     const changePage = (page:number)=>{
         dispatch(setPage(page))
