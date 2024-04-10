@@ -12,7 +12,7 @@ export const useAnimation = async ({ interval, id, carRef,setWinner,setNewPostio
     const speed = await toggleEngine({id,status:"started"})
     let pos = 0;
     driveCar({id}).then((res) => {
-        if(!res) {
+        if(!res && interval.current) {
             clearInterval(interval.current)
             setNewPostion(pos)
         }
