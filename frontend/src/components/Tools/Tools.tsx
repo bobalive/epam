@@ -37,7 +37,10 @@ export const Tools = ()=>{
             <Tool name={''} color={'0000'} submit={create} type={"active"}>Create Car</Tool>
             <Tool id={id} color={color} name={name} type={id >0?"default":"disabled"} submit={handleChange} >Edit Car</Tool>
             <div className={s.toolsFooter}>
-            <Button state={!isRace?"default":'disabled'} onClick={()=>dispatch(setIsRace(true))}>Race</Button>
+            <Button state={!isRace?"default":'disabled'} onClick={()=> {
+                handleReset()
+                dispatch(setIsRace(true))
+            }}>Race</Button>
             <Button state={!isRace?"disabled":"default"} onClick={handleReset}>Reset</Button>
             <Button state={"active"} onClick={generate}>Generate Cars</Button>
             </div>

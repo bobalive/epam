@@ -12,10 +12,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {StoreInterface} from "../../../interfaces/storeInterface.ts";
 import {setCurrnetWinner} from "../../../store/slices/winnersSlice.ts";
 import {setPosition} from "../../../store/slices/carSlise.ts";
-
 export const Car = ({id,color,name,isSelected,position }:CarPropsInterface) => {
     const [isStarted , setIsstarted]= useState(false)
-    const [carState , setCatState]= useState<'stop'|'drive'>('stop')
+    const [carState , setCarState]= useState<'stop'|'drive'>('stop')
 
     const dispatch = useDispatch()
     const isRace = useSelector<StoreInterface , boolean>(store=> store.app.isRace)
@@ -63,14 +62,14 @@ export const Car = ({id,color,name,isSelected,position }:CarPropsInterface) => {
                 <Pause className={cn({[s.active]:!isStarted},[s.roadTool])}
                 onClick={()=> {
                     if(isStarted){
-                    setCatState('stop')
+                    setCarState('stop')
                     handleStop()
                     toggleEngine({id,status:'stopped'})
                     }
                 }}/>
                 <Play className={cn({[s.active]: isStarted}, [s.roadTool])}
                 onClick={()=> {
-                   setCatState('drive')
+                   setCarState('drive')
                     if(carState === 'stop'){
                         handleAnimation()
                     }
