@@ -12,6 +12,7 @@ Next, install dependensies in the frontend:
 
 ```bash
 cd frontend
+npm i
 npm run dev
 ```
 
