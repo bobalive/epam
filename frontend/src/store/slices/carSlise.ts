@@ -1,6 +1,13 @@
 import { createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {createCar, getCars, getTotalCarsNumber, handleDeleteCar, handleUpdateCar} from "../../api/cars.api.ts";
-import {CarInterface, CarParams} from "../../interfaces/carInterface.ts";
+import {
+    createCar,
+    getCars,
+    getTotalCarsNumber,
+    handleDeleteCar,
+    handleUpdateCar,
+
+} from "../../api/cars.api.ts";
+import {CarInterface, CarParams, SelectedCarInterface} from "../../interfaces/carInterface.ts";
 import {CarsReduserInerface, StoreInterface} from "../../interfaces/storeInterface.ts";
 
 
@@ -11,8 +18,8 @@ const initialState:CarsReduserInerface = {
     selectedCar:{
         id:-1,
         name:'',
-        color:''
-    }
+        color:'',
+    },
 };
 export const getNewCars = createAsyncThunk(
     'cars/fetchCars',
@@ -39,7 +46,7 @@ export const deleteCar = createAsyncThunk(
 )
 export const upadateCar = createAsyncThunk(
     "cars/update",
-    async ({color, name,id}:CarInterface)=>{
+    async ({color, name,id}:SelectedCarInterface)=>{
         const response = await handleUpdateCar({color, name,id})
         return response
     }
@@ -57,11 +64,25 @@ const carsSlice = createSlice({
         },
         setSelectedCar(state , action:PayloadAction<CarInterface>){
             state.selectedCar = action.payload
+        },
+        setPosition(state , action:PayloadAction<{id:number,position:number}>){
+            state.cars = state.cars?.map(item=>{
+                if(item.id === action.payload.id){
+                    return {
+                        ...item,
+                        postion:action.payload.position
+                    }
+                }
+                return item
+            })
         }
     },
     extraReducers: (builder) => {
         builder.addCase(getNewCars.fulfilled, (state, action) => {
-            state.cars =  action.payload;
+            state.cars =  action.payload?.map(item=>({
+                ...item,
+                postion:0
+            }));
         });
         builder.addCase(createNewCar.fulfilled , (state, _action)=>{
             state.totalNumber++
@@ -76,16 +97,17 @@ const carsSlice = createSlice({
             state.selectedCar = {
                 id:-1,
                 name:'',
-                color:''
+                color:'',
             }
             state.cars = state.cars?.map(car=>{
                 if(car.id === action.payload?.id){
-                    return action.payload
+                    return {...action.payload , position:0}
                 }
                 return  car
             })
         })
+
     },
 });
-export const { setCars,setPage,setSelectedCar } = carsSlice.actions;
+export const { setCars,setPage,setSelectedCar,setPosition } = carsSlice.actions;
 export default carsSlice.reducer;

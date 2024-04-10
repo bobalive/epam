@@ -3,6 +3,9 @@ export interface CarParams {
     name:string
 }
 
-export interface CarInterface extends CarParams{
-    id: number
+export interface SelectedCarInterface extends CarParams{
+    id: number,
+}
+export interface CarInterface extends SelectedCarInterface{
+    position?:number
 }

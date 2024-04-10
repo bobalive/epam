@@ -1,9 +1,10 @@
 import './App.css'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-
 import {Garage} from "./pages/Garage/Garage..tsx";
 import {Provider} from "react-redux";
 import {store} from "./store/reduxStore.ts";
+import {Winners} from "./pages/Winners/Winners.tsx";
+import {Header} from "./components/Header/Header.tsx";
 
 
 function App() {
@@ -11,9 +12,10 @@ function App() {
       <div className='container'>
           <Provider store={store}>
           <BrowserRouter>
+              <Header/>
               <Routes>
                   <Route path={'/'} element={<Garage/>}/>
-                  <Route path={'/winners'} element={<Garage/>}/>
+                  <Route path={'/winners'} element={<Winners/>}/>
               </Routes>
             </BrowserRouter>
           </Provider>
