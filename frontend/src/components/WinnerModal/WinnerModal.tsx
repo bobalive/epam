@@ -8,7 +8,7 @@ export const WinnerModal = ()=> {
     return (
         <>
             {id>=0
-                ?<div className={s.winnerModal}>
+                ?<div className={s.winnerModal} >
                     <h3>Winner is: {name} </h3>
                     <span>time {time}</span>
                 </div>

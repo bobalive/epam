@@ -10,6 +10,7 @@ import {StoreInterface} from "../../interfaces/storeInterface.ts";
 
 export const Garage= ({page}:GarageProps)=>{
     const totalNumber = useSelector<StoreInterface,number>(state => state.cars.totalNumber)
+
     return(
        <div>
            <WinnerModal/>

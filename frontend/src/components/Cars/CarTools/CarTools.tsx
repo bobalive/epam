@@ -4,10 +4,12 @@ import {useDispatch} from "react-redux";
 import {AppDispatch} from "../../../interfaces/storeInterface.ts";
 import {deleteCar, getNewCars, setSelectedCar} from "../../../store/slices/carSlise.ts";
 import {CarPropsInterface} from "../Car/CarsPropsInterface.ts";
+import {deleteWinnerCar} from "../../../store/slices/winnersSlice.ts";
 export const CarTools = ({name, id,color,isSelected}:CarPropsInterface) => {
     const dispatch = useDispatch<AppDispatch>()
     const handleDelete = ()=>{
         dispatch(deleteCar(id))
+        dispatch(deleteWinnerCar(id))
         dispatch(getNewCars())
     }
     const handleSelect = ()=>{

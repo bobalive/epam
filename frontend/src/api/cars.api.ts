@@ -2,14 +2,21 @@ import axios from "./axios.ts";
 import { AxiosResponse} from "axios";
 import {CarInterface, CarParams, SelectedCarInterface} from "../interfaces/carInterface.ts";
 import {EngineInterface, EnginePatchInterface} from "../interfaces/engineInterface.ts";
+import {limitgarage} from "../config/paginationLimit.ts";
 
 export const getCars = async (page:number)=>{
     const queryParams ={
         _page:page,
-        _limit:7
+        _limit:limitgarage
     }
     const res:AxiosResponse<CarInterface[]> = await axios.get('/garage' ,{params:queryParams})
     if(res.status === 200){
+        return res.data
+    }
+}
+export const getCarInfo = async (id:number)=>{
+    const res:AxiosResponse<CarInterface> = await axios.get('/garage/'+id)
+    if(res.status === 200 ){
         return res.data
     }
 }
@@ -19,7 +26,6 @@ export const getTotalCarsNumber = async ()=>{
         _limit:9999
     }
     const res:AxiosResponse<CarInterface[]> = await  axios.get('/garage' , {params:queryParams})
-
     if(res.status === 200){
         return res.data.length
     }

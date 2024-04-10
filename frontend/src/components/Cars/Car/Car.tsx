@@ -27,13 +27,14 @@ export const Car = ({id,color,name,isSelected,position }:CarPropsInterface) => {
         dispatch(setPosition({id,position}))
     }
     const setWinner = (time:number)=>{
-        dispatch(setCurrnetWinner({time,name,color,id}))
+        dispatch(setCurrnetWinner({time,name,id}))
     }
     useEffect(() => {
-        handleStop()
         if(isRace && position == 0){
             setIsstarted(true)
             handleAnimation(setWinner)
+        }else if(!isRace){
+            handleStop()
         }
     }, [isRace]);
     useEffect(() => {
@@ -47,9 +48,11 @@ export const Car = ({id,color,name,isSelected,position }:CarPropsInterface) => {
         setIsstarted(true)
     }
     const handleStop = ()=>{
-        if(carRef.current ){
+        if(carRef.current){
             setIsstarted(false)
             clearInterval(interval.current)
+            carRef.current.style.transform = `translateX(${0}px)`
+            setNewPostion(0)
         }
     }
   return(
